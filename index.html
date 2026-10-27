@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Santosh — CSBS student at Rajalakshmi Institute of Technology. Aspiring data scientist and developer." />
+    <meta name="theme-color" content="#05060a" />
+    <title>Santosh — CSBS Student & Aspiring Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+
+  <body class="bg-[#05060a] text-slate-200 font-[Inter] antialiased overflow-x-hidden">
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader" class="page-loader" aria-hidden="true">
+      <div class="loader-inner">
+        <span class="loader-mark">SG</span>
+        <span class="loader-bar"><span class="loader-bar-fill"></span></span>
+      </div>
+    </div>
+
+    <!-- AMBIENT BACKGROUND -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--violet" aria-hidden="true"></div>
+    <div class="bg-noise" aria-hidden="true"></div>
+
+    <!-- CUSTOM CURSOR DOT -->
+    <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 nav-shell">
+      <nav
+        class="mx-auto max-w-7xl px-5 sm:px-8 h-16 sm:h-[72px] flex items-center justify-between"
+        aria-label="Primary"
+      >
+        <a href="#home" class="group flex items-center gap-3" aria-label="Santosh — Home">
+          <span class="logo-mark">SG</span>
+          <span class="hidden sm:block text-sm tracking-wide text-slate-300 group-hover:text-white transition">
+            Santosh&nbsp;G
+          </span>
+        </a>
+
+        <ul class="hidden md:flex items-center gap-8 text-sm">
+          <li><a href="#home"     class="nav-link">Home</a></li>
+          <li><a href="#about"    class="nav-link">About</a></li>
+          <li><a href="#skills"   class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact"  class="nav-link">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="hidden md:inline-flex btn btn-ghost text-sm">
+          Let's Connect
+        </a>
+
+        <button
+          id="menu-toggle"
+          class="md:hidden relative w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hamburger"><span></span><span></span><span></span></span>
+        </button>
+      </nav>
+
+      <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
+        <ul class="flex flex-col gap-1 p-4">
+          <li><a href="#home"     class="mobile-link">Home</a></li>
+          <li><a href="#about"    class="mobile-link">About</a></li>
+          <li><a href="#skills"   class="mobile-link">Skills</a></li>
+          <li><a href="#projects" class="mobile-link">Projects</a></li>
+          <li><a href="#contact"  class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="https://github.com/Santosh2007er" target="_blank" rel="noopener" class="mobile-link mobile-link--accent">
+              GitHub ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="home">
+
+      <!-- HERO -->
+      <section class="relative min-h-[100svh] flex items-center pt-24 pb-16">
+        <div class="mx-auto max-w-7xl w-full px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+
+          <div class="hero-left">
+            <p class="reveal text-xs sm:text-sm tracking-[0.35em] text-cyan-300/80 font-medium mb-4">
+              HELLO, I'M
+            </p>
+
+            <h1 class="reveal text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] font-[Sora] tracking-tight">
+              <span class="text-white">Santosh</span>
+              
+            </h1>
+
+            <div class="reveal mt-6 flex items-center gap-3 text-slate-300">
+              <span class="status-dot" aria-hidden="true"></span>
+              <p id="rotating-headline" class="text-base sm:text-lg font-medium">
+                <span class="typed-text">CSBS Student</span>
+                <span class="caret" aria-hidden="true"></span>
+              </p>
+            </div>
+
+            <p class="reveal mt-6 max-w-xl text-slate-400 leading-relaxed text-[15px] sm:text-base">
+              A B.Tech <span class="text-slate-200">CSBS</span> student at
+              Rajalakshmi Institute of Technology, exploring the intersection of
+              <span class="text-slate-200">data</span>, <span class="text-slate-200">software</span>,
+              and <span class="text-slate-200">the web</span>. Currently building projects
+              and learning Java — one commit at a time.
+            </p>
+
+            <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+              <a href="#projects" class="btn btn-primary">
+                Explore My Work
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </a>
+              <a href="#contact" class="btn btn-ghost">Let's Connect</a>
+              <a
+                href="https://github.com/Santosh2007er"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-icon"
+                aria-label="GitHub profile"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.93c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+                </svg>
+              </a>
+            </div>
+
+            <div class="reveal mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500 font-[JetBrains_Mono]">
+              <span>📍 Tamil Nadu, India</span>
+              <span class="hidden sm:inline">•</span>
+              <span>Class of 2029</span>
+              <span class="hidden sm:inline">•</span>
+              <span>Tamil / English</span>
+            </div>
+          </div>
+
+          <div class="hero-right flex justify-center lg:justify-end">
+            <div id="id-card" class="id-card" role="img" aria-label="Digital identity card for Santosh">
+              <div class="id-card__glow" aria-hidden="true"></div>
+              <div class="id-card__inner">
+                <div class="id-card__top">
+                  <span class="id-card__chip">DEV • CARD</span>
+                  <span class="id-card__signal" aria-hidden="true"></span>
+                </div>
+
+                <div class="id-card__body">
+                  <div class="id-card__initials">SG</div>
+                  <div class="id-card__meta">
+                    <p class="id-card__name">Santosh</p>
+                    <p class="id-card__role">CSBS Student</p>
+                    <p class="id-card__sub">Aspiring Data Scientist</p>
+                  </div>
+                </div>
+
+                <div class="id-card__divider" aria-hidden="true"></div>
+
+                <div class="id-card__footer">
+                  <div class="id-card__row">
+                    <span class="label">COLLEGE</span>
+                    <span class="value">RIT</span>
+                  </div>
+                  <div class="id-card__row">
+                    <span class="label">BATCH</span>
+                    <span class="value">2029</span>
+                  </div>
+                  <div class="id-card__row">
+                    <span class="label">FOCUS</span>
+                    <span class="value">Data · Web</span>
+                  </div>
+                </div>
+              </div>
+
+              <span class="floaty floaty--1" aria-hidden="true"></span>
+              <span class="floaty floaty--2" aria-hidden="true"></span>
+              <span class="floaty floaty--3" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#about" class="scroll-indicator" aria-label="Scroll to About">
+          <span class="scroll-indicator__line" aria-hidden="true"></span>
+          <span class="text-[10px] tracking-[0.3em] text-slate-500">SCROLL</span>
+        </a>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <div class="section-head reveal">
+            <span class="section-eyebrow">01 — About</span>
+            <h2 class="section-title">A student <span class="gradient-text">building with intent</span>.</h2>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            <div class="lg:col-span-7 reveal">
+              <div class="glass-card p-7 sm:p-10">
+                <p class="text-slate-300 leading-relaxed mb-5">
+                  I'm <span class="text-white font-medium">Santosh</span>, a second-year
+                  <span class="text-cyan-300">B.Tech Computer Science and Business Systems</span>
+                  student at Rajalakshmi Institute of Technology, graduating in 2029.
+                </p>
+                <p class="text-slate-400 leading-relaxed mb-5">
+                  My curiosity is centered around how data shapes decisions and how
+                  software brings ideas to life. I'm currently strengthening my
+                  foundations in <span class="text-slate-200">HTML, CSS, and JavaScript</span>
+                  while learning <span class="text-slate-200">Java</span> as my next step.
+                </p>
+                <p class="text-slate-400 leading-relaxed">
+                  I build small, honest projects to practice what I learn — not to
+                  claim experience I don't have, but to grow into the developer I
+                  want to become. I'm open to learning, collaborating, and being
+                  challenged.
+                </p>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 grid grid-cols-2 gap-4 reveal">
+              <div class="fact-card">
+                <span class="fact-icon">🎓</span>
+                <p class="fact-label">Education</p>
+                <p class="fact-value">B.Tech CSBS</p>
+              </div>
+              <div class="fact-card">
+                <span class="fact-icon">🏛️</span>
+                <p class="fact-label">College</p>
+                <p class="fact-value">Rajalakshmi IT</p>
+              </div>
+              <div class="fact-card">
+                <span class="fact-icon">🗓️</span>
+                <p class="fact-label">Graduating</p>
+                <p class="fact-value">2029</p>
+              </div>
+              <div class="fact-card">
+                <span class="fact-icon">🌐</span>
+                <p class="fact-label">Languages</p>
+                <p class="fact-value">Tamil / English</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="section">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <div class="section-head reveal">
+            <span class="section-eyebrow">02 — Skills</span>
+            <h2 class="section-title">Tools I'm <span class="gradient-text">learning & using</span>.</h2>
+            <p class="section-sub">Honest status — no inflated percentages.</p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="skill-card reveal">
+              <div class="skill-icon" style="--c1:#ff7a59; --c2:#ffb46b;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M4 4h16l-1.5 15L12 21l-6.5-2L4 4Z"/><path d="M8 8h8M8 12h8M9 16h6"/>
+                </svg>
+              </div>
+              <h3 class="skill-name">HTML</h3>
+              <p class="skill-desc">Semantic structure and accessible markup.</p>
+              <span class="skill-badge">Comfortable</span>
+            </div>
+
+            <div class="skill-card reveal">
+              <div class="skill-icon" style="--c1:#4f9dff; --c2:#7cd3ff;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M4 4h16l-1.5 15L12 21l-6.5-2L4 4Z"/><path d="M8 9h8l-.5 5H9l.3 3"/>
+                </svg>
+              </div>
+              <h3 class="skill-name">CSS</h3>
+              <p class="skill-desc">Layouts, transitions and responsive styling.</p>
+              <span class="skill-badge">Comfortable</span>
+            </div>
+
+            <div class="skill-card reveal">
+              <div class="skill-icon" style="--c1:#f7df1e; --c2:#ffe873;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9v5a2 2 0 0 1-2 2"/><path d="M15 9v4c0 1 .7 1.5 1.6 1.5"/>
+                </svg>
+              </div>
+              <h3 class="skill-name">JavaScript</h3>
+              <p class="skill-desc">DOM basics, events and small interactive logic.</p>
+              <span class="skill-badge skill-badge--learning">Basics</span>
+            </div>
+
+            <div class="skill-card reveal">
+              <div class="skill-icon" style="--c1:#e76f51; --c2:#f4a261;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M8 18c0-2 2-2 3-3.5S13 12 12 10c2 .5 3 2 3 3.5S13 17 12 18"/><path d="M6 21h12"/>
+                </svg>
+              </div>
+              <h3 class="skill-name">Java</h3>
+              <p class="skill-desc">Object-oriented fundamentals in progress.</p>
+              <span class="skill-badge skill-badge--learning">Learning</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="section">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <div class="section-head reveal">
+            <span class="section-eyebrow">03 — Projects</span>
+            <h2 class="section-title">Things I've <span class="gradient-text">built to learn</span>.</h2>
+            <p class="section-sub">Honest, small projects. More coming as I grow.</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <article class="project-card reveal">
+              <div class="project-visual project-visual--quotes" aria-hidden="true">
+                <span class="quote-mark">“</span>
+                <span class="quote-line quote-line--1"></span>
+                <span class="quote-line quote-line--2"></span>
+                <span class="quote-line quote-line--3"></span>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
+                </div>
+                <h3 class="project-title">QuoteMaster Website</h3>
+                <p class="project-desc">
+                  A web app for displaying and working with quotes, built while
+                  practising DOM manipulation, event handling and styling with
+                  HTML, CSS and JavaScript.
+                </p>
+                <div class="project-links">
+                  <a
+                    href="https://github.com/Santosh2007er"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-arrow"
+                  >
+                    GitHub Profile
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                  </a>
+                  <a href="#" class="link-arrow link-arrow--muted" title="Add your repository URL">
+                    Repo Link — add later
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal">
+              <div class="project-visual project-visual--secure" aria-hidden="true">
+                <div class="shield">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/>
+                    <path d="M9.5 12.5 11 14l3.5-3.5"/>
+                  </svg>
+                </div>
+                <span class="secure-line secure-line--1"></span>
+                <span class="secure-line secure-line--2"></span>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="tag">Backend</span><span class="tag tag--learning">Beginner</span>
+                </div>
+                <h3 class="project-title">SecureDocumentSystem</h3>
+                <p class="project-desc">
+                  My first step into backend development — a beginner project
+                  focused on handling document uploads and basic storage logic.
+                </p>
+                <div class="project-links">
+                  <a
+                    href="https://github.com/Santosh2007er"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-arrow"
+                  >
+                    GitHub Profile
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                  </a>
+                  <a href="#" class="link-arrow link-arrow--muted" title="Add your repository URL">
+                    Repo Link — add later
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CURRENT FOCUS -->
+      <section id="focus" class="section">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <div class="focus-banner reveal">
+            <div class="focus-banner__glow" aria-hidden="true"></div>
+            <div class="relative z-10 grid lg:grid-cols-2 gap-10 items-center p-8 sm:p-12 lg:p-16">
+              <div>
+                <span class="section-eyebrow">04 — Currently</span>
+                <h2 class="section-title mt-3">What I'm <span class="gradient-text">focused on right now</span>.</h2>
+                <p class="mt-5 text-slate-400 leading-relaxed max-w-lg">
+                  Building momentum with Java while keeping my web foundations strong.
+                  My goal is to grow toward data science and software development,
+                  one honest project at a time.
+                </p>
+              </div>
+
+              <div class="grid gap-3">
+                <div class="focus-item">
+                  <span class="focus-dot" style="--dc:#ffb46b;"></span>
+                  <div>
+                    <p class="focus-item__title">Java — Learning</p>
+                    <p class="focus-item__sub">OOP basics, syntax, small console programs</p>
+                  </div>
+                </div>
+                <div class="focus-item">
+                  <span class="focus-dot" style="--dc:#4f9dff;"></span>
+                  <div>
+                    <p class="focus-item__title">Data Science & Analysis</p>
+                    <p class="focus-item__sub">Exploring concepts, tools and how data tells stories</p>
+                  </div>
+                </div>
+                <div class="focus-item">
+                  <span class="focus-dot" style="--dc:#a78bfa;"></span>
+                  <div>
+                    <p class="focus-item__title">Web Development</p>
+                    <p class="focus-item__sub">Strengthening HTML, CSS and JavaScript fundamentals</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <div class="section-head reveal">
+            <span class="section-eyebrow">05 — Contact</span>
+            <h2 class="section-title">Let's <span class="gradient-text">connect</span>.</h2>
+            <p class="section-sub">
+              Open to learning opportunities, collaborations and friendly conversations.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-6 space-y-3 reveal">
+              <a
+                href="https://github.com/Santosh2007er"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-row"
+              >
+                <span class="contact-row__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.93c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+                  </svg>
+                </span>
+                <span class="flex-1">
+                  <span class="contact-row__label">GitHub</span>
+                  <span class="contact-row__value">github.com/Santosh2007er</span>
+                </span>
+                <span class="contact-row__arrow">↗</span>
+              </a>
+
+              <a href="#" class="contact-row" data-placeholder="true" title="Replace with your email">
+                <span class="contact-row__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+                  </svg>
+                </span>
+                <span class="flex-1">
+                  <span class="contact-row__label">Email</span>
+                  <span class="contact-row__value">Santosh2007er@gmail.com</span>
+                </span>
+                <span class="contact-row__arrow">↗</span>
+              </a>
+
+              <a href="#" class="contact-row" data-placeholder="true" title="Replace with your LinkedIn">
+                <span class="contact-row__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21h-4V9Z"/>
+                  </svg>
+                </span>
+                <span class="flex-1">
+                  <span class="contact-row__label">LinkedIn</span>
+                  <span class="contact-row__value">linkedin.com/in/santosh-g-28b9a0383</span>
+                </span>
+                <span class="contact-row__arrow">↗</span>
+              </a>
+
+              <p class="text-xs text-slate-500 pt-2 leading-relaxed">
+                Placeholders marked <span class="text-slate-400">“add later”</span> are intentionally not
+                linked yet — replace the <code class="text-cyan-300/80">href</code> values in
+                <code class="text-cyan-300/80">index.html</code> when you have real URLs.
+              </p>
+            </div>
+
+            <div class="lg:col-span-6 reveal">
+              <form id="contact-form" class="glass-card p-7 sm:p-8" novalidate>
+                <p class="text-xs text-amber-300/80 bg-amber-500/10 border border-amber-400/20 rounded-lg px-3 py-2 mb-5 leading-relaxed">
+                  ⚠ This form is a UI demo. Delivering messages requires a backend or an
+                  external service (e.g. Formspree, EmailJS). It does <strong>not</strong> send emails by itself.
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="name" class="form-label">Name</label>
+                    <input id="name" name="name" type="text" class="form-input" placeholder="Your name" autocomplete="name" />
+                  </div>
+                  <div>
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" name="email" type="email" class="form-input" placeholder="you@example.com" autocomplete="email" />
+                  </div>
+                </div>
+
+                <div class="mb-5">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea id="message" name="message" rows="4" class="form-input resize-none" placeholder="Say hello..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full justify-center">
+                  Send Message
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+                </button>
+                <p id="form-note" class="text-xs text-slate-500 mt-3 text-center min-h-[1.2em]"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 mt-10">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="logo-mark logo-mark--sm">SG</span>
+          <span class="text-sm text-slate-400">Santosh — built with curiosity.</span>
+        </div>
+        <div class="flex items-center gap-5 text-sm">
+          <a href="https://github.com/Santosh2007er" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+          <a href="#home" class="nav-link">Back to top ↑</a>
+        </div>
+        <p class="text-xs text-slate-500 font-[JetBrains_Mono]">
+          © <span id="year">2025</span> Santosh G
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
