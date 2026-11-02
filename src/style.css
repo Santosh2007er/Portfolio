@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss";
 
 /* ==================================================================
    1. THEME TOKENS & BASE
@@ -655,6 +654,13 @@ body { overflow-x: hidden; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
               0 10px 30px -10px rgba(124, 211, 255, 0.7);
 }
+.id-card__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+  display: block;
+}
 
 .id-card__meta p { margin: 0; }
 
@@ -1260,4 +1266,157 @@ footer .nav-link { font-size: 0.9rem; }
 @media (min-width: 1024px) {
   /* Keep the hero ID card slightly elevated */
   .id-card { margin-top: -10px; }
+}
+/* ==================================================================
+   19. LIVE PARTICLE NETWORK BACKGROUND
+   ================================================================== */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none; }
+}
+
+/* Push other background layers behind the canvas */
+.bg-grid {
+  z-index: -3;
+}
+.bg-glow--blue {
+  z-index: -1;
+  opacity: 0.25;
+}
+.bg-glow--violet {
+  z-index: -1;
+  opacity: 0.22;
+}
+.bg-noise {
+  z-index: 0;
+  mix-blend-mode: overlay;
+  opacity: 0.025;
+}
+/* ===== 20. FAIL-SAFES ===== */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html, body { height: auto; }
+body { overflow-x: clip; }
+
+/* loader hides itself via CSS even if JS fails */
+.page-loader { animation: loaderAutoHide .6s ease 2.2s forwards; }
+@keyframes loaderAutoHide { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* content is only hidden once JS is confirmed running */
+.reveal { opacity: 1; transform: none; }
+.js-ready .reveal { opacity: 0; transform: translateY(24px) scale(.98); }
+.js-ready .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ===== 21. NEW EFFECTS ===== */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 60;
+  transform-origin: left; transform: scaleX(0);
+  background: linear-gradient(90deg, #7cd3ff, #a78bfa, #f0abfc);
+  box-shadow: 0 0 12px rgba(124, 211, 255, .7);
+}
+
+/* mouse-follow spotlight on cards */
+.spot:hover {
+  background-image:
+    radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(124, 211, 255, .14), transparent 45%),
+    linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015));
+}
+
+/* shine sweep on buttons */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .4) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .7s var(--ease-out);
+}
+.btn:hover::before { transform: translateX(120%); }
+
+/* floating + glowing ID card */
+.hero-right { animation: bob 6s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-12px); } }
+.id-card { background-size: 300% 300%; animation: borderFlow 7s ease infinite; }
+@keyframes borderFlow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* icon + logo micro-interactions */
+.skill-icon { transition: transform .4s var(--ease-out), box-shadow .4s; }
+.skill-card:hover .skill-icon { transform: translateY(-3px) rotate(-6deg) scale(1.08); box-shadow: 0 0 24px -4px var(--c1); }
+.fact-card:hover .fact-icon { animation: wiggle .6s; }
+@keyframes wiggle { 25% { transform: rotate(-12deg) scale(1.15); } 60% { transform: rotate(10deg) scale(1.15); } }
+.logo-mark { transition: transform .4s var(--ease-out); }
+.logo-mark:hover { transform: rotate(-8deg) scale(1.08); }
+.project-visual { transition: filter .4s; }
+.project-card:hover .project-visual { filter: saturate(1.35) brightness(1.1); }
+.section-eyebrow::before {
+  content: ""; display: inline-block; width: 28px; height: 1px; margin-right: 10px;
+  vertical-align: middle; background: linear-gradient(90deg, transparent, #7cd3ff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-right, .id-card { animation: none !important; }
+}
+/* ==================================================================
+   22. BRAND LOGO IMAGE (SG logo in nav + footer)
+   ================================================================== */
+.logo-img {
+  display: block;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: 11px;
+  /* fade the logo's black background into the site's dark theme */
+  background: radial-gradient(circle at 30% 30%, rgba(124, 211, 255, 0.06), rgba(5, 6, 10, 0.9) 70%);
+  /* subtle glow + ring to match .logo-mark styling */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 6px 20px -8px rgba(79, 157, 255, 0.55);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+  /* keeps the logo crisp on hi-DPI screens */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.logo-img--sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+}
+
+/* preserve the existing hover effect that .logo-mark had */
+a:hover > .logo-img,
+.logo-img:hover {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 26px -6px rgba(124, 211, 255, 0.75);
+}
+
+/* mobile: slightly smaller so it never crowds the nav */
+@media (max-width: 480px) {
+  .logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .logo-img--sm {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+}
+
+/* respect the existing reduced-motion block */
+@media (prefers-reduced-motion: reduce) {
+  .logo-img,
+  a:hover > .logo-img {
+    transition: none !important;
+    transform: none !important;
+  }
 }

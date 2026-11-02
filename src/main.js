@@ -287,11 +287,12 @@ if (idCard && !isTouchDevice && !prefersReducedMotion) {
 /* ------------------------------------------------------------------
  * 11. Contact form (frontend-only demo)
  * ------------------------------------------------------------------ */
+
 const contactForm = $("#contact-form");
 const formNote = $("#form-note");
 
 if (contactForm && formNote) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const name = contactForm.elements["name"]?.value.trim() || "";
@@ -312,13 +313,41 @@ if (contactForm && formNote) {
       return;
     }
 
-    formNote.classList.remove("is-error");
-    formNote.classList.add("is-success");
-    formNote.textContent =
-      "Looks good! This is a frontend demo — connect a service like Formspree to actually send it.";
-    contactForm.reset();
+    formNote.classList.remove("is-error", "is-success");
+    formNote.textContent = "Sending your message...";
+
+    try {
+      const response = await fetch("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send message.");
+      }
+
+      formNote.textContent = result.emailSent
+    ? "Message sent successfully!"
+    : "Message saved, but email notification failed.";
+      formNote.classList.add("is-success");
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      formNote.textContent =
+        error.message || "Something went wrong. Please try again.";
+
+      formNote.classList.add("is-error");
+    }
   });
 }
+
 
 /* ------------------------------------------------------------------
  * 12. Dynamic footer year
