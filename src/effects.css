@@ -1,0 +1,115 @@
+/* ==================================================================
+   effects.css — extra "cool" layer, loaded after style.css
+   ================================================================== */
+
+@property --ang {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Cursor ring (lags behind the dot) */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  border: 1px solid rgba(124, 211, 255, 0.55);
+  pointer-events: none;
+  z-index: 89;
+  will-change: transform;
+  transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
+              margin 0.25s var(--ease-out), border-color 0.25s;
+}
+.cursor-ring.is-hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: rgba(167, 139, 250, 0.8);
+}
+@media (hover: none) { .cursor-ring { display: none; } }
+
+/* Background glows drift with the mouse */
+.bg-glow--blue   { translate: calc(var(--px, 0) * 40px) calc(var(--py, 0) * 30px); }
+.bg-glow--violet { translate: calc(var(--px, 0) * -50px) calc(var(--py, 0) * -35px); }
+
+/* Hero name — animated light sweep */
+.hero-left h1 span {
+  background: linear-gradient(110deg, #fff 30%, #7cd3ff 44%, #a78bfa 56%, #fff 70%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: nameShine 5s linear infinite;
+}
+@keyframes nameShine {
+  0%   { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+
+/* Spinning neon border on hover (projects + skills) */
+.project-card::before,
+.skill-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--ang), transparent 0 65%, #7cd3ff, #a78bfa, #f0abfc, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.4s;
+  animation: spinAng 3.5s linear infinite;
+  pointer-events: none;
+}
+.project-card:hover::before,
+.skill-card:hover::before { opacity: 1; }
+@keyframes spinAng { to { --ang: 360deg; } }
+
+/* Faster transform while tilting / magnetic */
+.tilt-active { transition: transform 0.12s linear, border-color 0.35s, box-shadow 0.35s !important; }
+.magnetic    { transition: transform 0.2s var(--ease-out), box-shadow 0.25s, background 0.25s, border-color 0.25s, color 0.25s !important; }
+
+/* Glare that follows the mouse on the ID card */
+.id-card__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.14), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.id-card.is-tilting .id-card__inner::after { opacity: 1; }
+
+/* Spotlight tweak so it reads on every card type */
+.spot { transition: background-color 0.3s; }
+
+/* Glowing scroll progress head */
+#scroll-progress { will-change: transform; }
+
+/* Section titles get a soft glow underline on reveal */
+.section-title { position: relative; }
+.section-title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7cd3ff, #a78bfa, #f0abfc);
+  box-shadow: 0 0 16px rgba(124, 211, 255, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-left h1 span { animation: none; }
+  .project-card::before, .skill-card::before { animation: none; }
+  .cursor-ring { display: none; }
+  .bg-glow--blue, .bg-glow--violet { translate: none; }
+}
