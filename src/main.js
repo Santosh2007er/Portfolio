@@ -368,7 +368,7 @@ if (contactForm && formNote) {
     formNote.textContent = "Sending your message...";
 
     try {
-      const response = await fetch("http://192.168.1.6:3000/api/contact", {
+      const response = await fetch("http://192.168.1.4:3000/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
