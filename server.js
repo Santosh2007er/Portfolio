@@ -10,11 +10,16 @@ console.log("Gmail address loaded:", Boolean(process.env.EMAIL_USER));
 console.log("Gmail app password loaded:", Boolean(process.env.EMAIL_APP_PASSWORD));
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
+const allowedOrigins = [
+    "http://localhost:5173",
+    process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: allowedOrigins
 }));
 app.use(express.json());
 
@@ -27,6 +32,7 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10
 });
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -83,34 +89,35 @@ app.post("/api/contact", async (req, res) => {
             "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)",
             [cleanName, cleanEmail, cleanMessage]
         );
+
         let emailSent = false;
 
-try {
-    await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        replyTo: cleanEmail,
-        subject: `New portfolio message from ${cleanName}`,
-        text: `Name: ${cleanName}
+        try {
+            await transporter.sendMail({
+                from: process.env.EMAIL_USER,
+                to: process.env.EMAIL_USER,
+                replyTo: cleanEmail,
+                subject: `New portfolio message from ${cleanName}`,
+                text: `Name: ${cleanName}
 
 Email: ${cleanEmail}
 
 Message:
 ${cleanMessage}`
-    });
+            });
 
-    emailSent = true;
+            emailSent = true;
 
-} catch (mailError) {
-    console.error("Email notification failed:", mailError);
-}
+        } catch (mailError) {
+            console.error("Email notification failed:", mailError);
+        }
 
         res.status(201).json({
-    message: emailSent
-        ? "Message saved and email notification sent!"
-        : "Message saved, but email notification failed.",
-    emailSent
-});
+            message: emailSent
+                ? "Message saved and email notification sent!"
+                : "Message saved, but email notification failed.",
+            emailSent
+        });
 
     } catch (error) {
         console.error("Contact form error:", error);

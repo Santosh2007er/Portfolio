@@ -366,9 +366,9 @@ if (contactForm && formNote) {
 
     formNote.classList.remove("is-error", "is-success");
     formNote.textContent = "Sending your message...";
-
+    const API_BASE_URL = import.meta.env.VITE_API_URL || "http://192.168.1.6:3000";
     try {
-      const response = await fetch("http://192.168.1.4:3000/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {//const response = await fetch("http://192.168.1.4:3000/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
