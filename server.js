@@ -4,6 +4,8 @@ import mysql from "mysql2/promise";
 import cors from "cors";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 console.log("Gmail address loaded:", Boolean(process.env.EMAIL_USER));
@@ -126,7 +128,9 @@ ${cleanMessage}`
         });
     }
 });
-const path = require('path'); // Add this at the top of the file if it's not already there
+// Recreate __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, 'dist')));
