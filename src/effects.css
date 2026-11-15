@@ -8,7 +8,97 @@
   initial-value: 0deg;
 }
 
-/* Cursor ring (lags behind the dot) */
+/* ==================================================================
+   A. BACKGROUND LAYERING FIX (makes the live background visible)
+   ================================================================== */
+html { background: #05060a; }
+body { background: transparent !important; }
+
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  display: block !important;   /* never hidden, even with reduced motion */
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* Drifting aurora colour mesh behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -4;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 35% at 20% 25%, rgba(79, 157, 255, 0.20), transparent 70%),
+    radial-gradient(35% 40% at 80% 30%, rgba(167, 139, 250, 0.18), transparent 70%),
+    radial-gradient(40% 35% at 60% 85%, rgba(240, 171, 252, 0.12), transparent 70%);
+  filter: blur(30px);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0%   { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+  100% { transform: translate3d(3%, 3%, 0) rotate(6deg) scale(1.1); }
+}
+
+/* Grid scrolls slowly with the page (parallax) */
+.bg-grid {
+  background-position: 0 calc(var(--sy, 0) * -0.12px), 0 calc(var(--sy, 0) * -0.12px);
+}
+
+/* Soft light that follows the cursor (element is created by main.js) */
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    520px circle at var(--cx, 50%) var(--cy, 30%),
+    rgba(124, 211, 255, 0.08),
+    transparent 60%
+  );
+}
+
+/* ==================================================================
+   B. GITHUB ICON (hero) — bigger and more visible
+   ================================================================== */
+.btn.btn-icon {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  justify-content: center;
+  color: #fff;
+  border-color: rgba(124, 211, 255, 0.5);
+  background: linear-gradient(135deg, rgba(124, 211, 255, 0.16), rgba(167, 139, 250, 0.16));
+  box-shadow: 0 0 0 0 rgba(124, 211, 255, 0.5), 0 10px 30px -10px rgba(124, 211, 255, 0.6);
+  animation: ghPulse 2.6s ease-out infinite;
+}
+.btn.btn-icon svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 8px rgba(124, 211, 255, 0.7));
+}
+.btn.btn-icon:hover {
+  color: #fff;
+  border-color: rgba(167, 139, 250, 0.85);
+  background: linear-gradient(135deg, rgba(124, 211, 255, 0.3), rgba(167, 139, 250, 0.3));
+}
+@keyframes ghPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(124, 211, 255, 0.5),  0 10px 30px -10px rgba(124, 211, 255, 0.6); }
+  70%  { box-shadow: 0 0 0 16px rgba(124, 211, 255, 0), 0 10px 30px -10px rgba(124, 211, 255, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(124, 211, 255, 0),    0 10px 30px -10px rgba(124, 211, 255, 0.6); }
+}
+@media (max-width: 480px) {
+  .btn.btn-icon { width: 54px; height: 54px; }
+  .btn.btn-icon svg { width: 26px; height: 26px; }
+}
+
+/* ==================================================================
+   C. CURSOR
+   ================================================================== */
 .cursor-ring {
   position: fixed;
   top: 0;
@@ -32,11 +122,22 @@
 }
 @media (hover: none) { .cursor-ring { display: none; } }
 
-/* Background glows drift with the mouse */
+/* ==================================================================
+   D. GLOWS / FLOATING SHAPES DRIFT WITH THE MOUSE
+   ================================================================== */
 .bg-glow--blue   { translate: calc(var(--px, 0) * 40px) calc(var(--py, 0) * 30px); }
 .bg-glow--violet { translate: calc(var(--px, 0) * -50px) calc(var(--py, 0) * -35px); }
 
-/* Hero name — animated light sweep */
+.floaty--1 { translate: calc(var(--px, 0) * -26px) calc(var(--py, 0) * -26px); }
+.floaty--2 { translate: calc(var(--px, 0) * 34px)  calc(var(--py, 0) * 30px); }
+.floaty--3 { translate: calc(var(--px, 0) * -40px) calc(var(--py, 0) * 22px); }
+
+/* ==================================================================
+   E. HERO TEXT + ID CARD
+   ================================================================== */
+.hero-left h1 {
+  filter: drop-shadow(0 0 28px rgba(124, 211, 255, 0.28));
+}
 .hero-left h1 span {
   background: linear-gradient(110deg, #fff 30%, #7cd3ff 44%, #a78bfa 56%, #fff 70%);
   background-size: 250% 100%;
@@ -50,7 +151,43 @@
   100% { background-position: -120% 0; }
 }
 
-/* Spinning neon border on hover (projects + skills) */
+/* Chip light sweep on the ID card */
+.id-card__chip { position: relative; overflow: hidden; }
+.id-card__chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(124, 211, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: chipSweep 3.5s ease-in-out infinite;
+}
+@keyframes chipSweep {
+  0%, 55% { transform: translateX(-120%); }
+  100%    { transform: translateX(120%); }
+}
+
+/* Logo block breathes */
+.id-card__initials { animation: logoGlow 3.2s ease-in-out infinite alternate; }
+@keyframes logoGlow {
+  0%   { box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 10px 30px -10px rgba(124,211,255,.55); }
+  100% { box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 14px 44px -8px rgba(167,139,250,.9); }
+}
+
+/* Glare that follows the mouse on the ID card */
+.id-card__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.14), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.id-card.is-tilting .id-card__inner::after { opacity: 1; }
+
+/* ==================================================================
+   F. CARDS: neon spinning border, spotlight, pop-in
+   ================================================================== */
 .project-card::before,
 .skill-card::before {
   content: "";
@@ -72,29 +209,23 @@
 .skill-card:hover::before { opacity: 1; }
 @keyframes spinAng { to { --ang: 360deg; } }
 
-/* Faster transform while tilting / magnetic */
+/* Cards pop in (fill-mode "backwards" so hover tilt still works afterwards) */
+.js-ready .skill-card.is-visible,
+.js-ready .project-card.is-visible {
+  animation: popIn 0.75s var(--ease-out) backwards;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(34px) scale(0.93) rotateX(10deg); }
+}
+
 .tilt-active { transition: transform 0.12s linear, border-color 0.35s, box-shadow 0.35s !important; }
 .magnetic    { transition: transform 0.2s var(--ease-out), box-shadow 0.25s, background 0.25s, border-color 0.25s, color 0.25s !important; }
 
-/* Glare that follows the mouse on the ID card */
-.id-card__inner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.14), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.id-card.is-tilting .id-card__inner::after { opacity: 1; }
-
-/* Spotlight tweak so it reads on every card type */
 .spot { transition: background-color 0.3s; }
 
-/* Glowing scroll progress head */
-#scroll-progress { will-change: transform; }
-
-/* Section titles get a soft glow underline on reveal */
+/* ==================================================================
+   G. SECTION TITLES + NAV
+   ================================================================== */
 .section-title { position: relative; }
 .section-title::after {
   content: "";
@@ -105,11 +236,41 @@
   border-radius: 999px;
   background: linear-gradient(90deg, #7cd3ff, #a78bfa, #f0abfc);
   box-shadow: 0 0 16px rgba(124, 211, 255, 0.6);
+  transition: width 0.9s var(--ease-out) 0.25s;
 }
+/* underline draws itself when the heading reveals */
+.js-ready .section-head .section-title::after { width: 0; }
+.js-ready .section-head.is-visible .section-title::after { width: 64px; }
 
+.nav-link.is-active { text-shadow: 0 0 14px rgba(124, 211, 255, 0.7); }
+
+#scroll-progress { will-change: transform; }
+
+/* ==================================================================
+   H. BUTTON CLICK RIPPLE
+   ================================================================== */
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: btnRipple 0.65s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes btnRipple { to { transform: scale(1); opacity: 0; } }
+
+/* ==================================================================
+   I. REDUCED MOTION
+   (the particle canvas intentionally stays on, but main.js slows it down)
+   ================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .hero-left h1 span { animation: none; }
   .project-card::before, .skill-card::before { animation: none; }
   .cursor-ring { display: none; }
-  .bg-glow--blue, .bg-glow--violet { translate: none; }
+  .bg-glow--blue, .bg-glow--violet, .floaty { translate: none; }
+  .cursor-spotlight { display: none; }
+  body::before { animation: none; }
+  .btn.btn-icon, .id-card__initials, .id-card__chip::after { animation: none; }
+  .js-ready .skill-card.is-visible,
+  .js-ready .project-card.is-visible { animation: none; }
 }
